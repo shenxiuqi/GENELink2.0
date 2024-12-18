@@ -2,11 +2,13 @@
 
 # GENELink2
 
+Advancing Cell-Type-Specific Gene Regulatory Network Inference from Transcriptomics Data at Cellular Resolution
+
 ## 1.Introduction
 
-**GENElink2**, an enhanced version of GENElink, is designed to infer **ctGRNs** from transcriptomic data at cellular or sub-cellular resolution. It utilizes **GATv2**, which replaces GAT's fixed linear transformation with a flexible, learnable parameterized transformation, enabling the capture of more complex gene relationships. To address gene node homogenization from over-smoothing, GENElink2 incorporates a residual module with skip connections that retain cell-specific regulatory information. Additionally, we improved negative sample selection during training by combining hard negative sampling with network analysis techniques and specific constraints.The figure below shows the overall framework of GENELink2.
+**GENElink2**, an enhanced version of GENElink, is designed to infer **ctGRNs** from transcriptomic data at cellular or sub-cellular resolution. It utilizes **GATv2**, which replaces GAT's fixed linear transformation with a flexible, learnable parameterized transformation, enabling the capture of more complex gene relationships. To address gene node homogenization from over-smoothing, GENElink2 incorporates a residual module with skip connections that retain gene-specific information. Additionally, we improved negative sample selection during training by combining hard negative sampling with network analysis techniques and specific constraints.The figure below shows the overall framework of GENELink2.
 
-![Fig 1.Overview of GENELink2 framework.]()
+![Fig 1.Overview of GENELink2 framework.](./figures/Figure_1.jpg)
 
 The environments in which this program can run stably are for reference only:
 
@@ -243,7 +245,7 @@ if __name__ == '__main__':
 
 `pre_PBMCs()` will complete data preprocessing, including simple quality control, normalization, MAGIC imputation, log transformation, clustering, and displaying the marker genes for each cluster, the expression of some known marker genes, the clustering results, and marking and displaying the top four clusters by sample size based on prior knowledge. The figure below highlights part of the outputs generated during this process:
 
-![Fig 2. Outputs from the preprocessing of PBMCs data.](https://github.com/shenxiuqi/GENELink2/blob/master/figures/PBMCs_git.png)  
+![Fig 2. Outputs from the preprocessing of PBMCs data.](./figures/PBMCs_git.png)  
 
 `hTFTarget_PCC()` will further process the data, including optional PCA dimensionality reduction and selecting the top 4,000 most variable genes. Then, using the hTFTarget data and limiting the regulatory relationships by the tissue of origin, a background network is generated. Cell specificity is introduced by adding edges from regulatory factors in the background network with PCC values above a certain threshold, and further cell specificity is achieved by removing edges from the background network with PCC values below a certain threshold.
 
@@ -256,3 +258,7 @@ if __name__ == '__main__':
 `con_net(args)` will construct the final gene regulatory network based on the regulatory factors in the ground truth network and the results from the model training. You can further view and analyze this network in Cytoscape.
 
 `st()` will generate statistics for the gene regulatory network, including measures such as In-Degree Centrality, Out-Degree Centrality, Closeness Centrality, and Clustering Coefficient.
+
+## Citation
+
+Please see citation widget on the sidebar.
